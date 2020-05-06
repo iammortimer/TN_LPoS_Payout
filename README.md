@@ -1,4 +1,4 @@
-# WE_LPoS_Payout
+# TN_LPoS_Payout
 Turtle Network payout script for lessors
 
 Based on <https://github.com/jansenmarc/WavesLPoSDistributer> but rewritten in Python.
