@@ -62,15 +62,24 @@ When you finished editing the config.json you are ready to run the script. This 
 2. (this is optional) Do a testrun of the actual payment.
 3. Do the payment
 
-To creat the payment file you need to execute the calcPayments.py:
+To create the payment file you need to execute calcPayments.py script:
 ```
 python calcPayments.py
 ```
+or
+```
+python3 calcPayments.py
+```
+
 It will show you what's happening. The saving of the block file could take a few minutes, so don't worry if it seems nothing is happening when it says 'saving blockfile...'.
 
 Once the script is completed (it will show you some statistics about this run, like forged blocks, number of leases, stuff like that) you can either do a testrun of the payment (set the doPayment in config.json to 0) or do the actual payment (set the doPayment in config.json to 1) by executing the following command:
 ```
 python doPayments.py
+```
+or
+```
+python3 doPayments.py
 ```
 
 And your done. 

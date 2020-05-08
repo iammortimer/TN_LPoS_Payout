@@ -5,7 +5,7 @@ import base58
 import PyCWaves
 import time
 
-with open('config_run.json') as json_file:
+with open('config.json') as json_file:
     config = json.load(json_file)
 
 def main():
