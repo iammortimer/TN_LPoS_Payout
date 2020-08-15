@@ -1,3 +1,4 @@
 requests
 base58 == 0.2.5
 PyCWaves
+hyperjson

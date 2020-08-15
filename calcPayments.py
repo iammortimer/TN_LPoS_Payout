@@ -1,5 +1,5 @@
 import requests
-import json
+import hyperjson
 import os
 
 myLeases = {}
@@ -8,8 +8,8 @@ myForgedBlocks = []
 payments = {}
 totalfee = 0
 
-with open('config.json') as json_file:
-    config = json.load(json_file)
+with open('config_run.json') as json_file:
+    config = hyperjson.load(json_file)
 
 def getAllBlocks():
     startblock = config['firstBlock']
@@ -25,7 +25,7 @@ def getAllBlocks():
     #try to load previous processed blocks
     try:
         with open(config['blockStorage'], 'r') as f:
-            blocks = json.load(f)
+            blocks = hyperjson.load(f)
 
         startblock = blocks[len(blocks) - 1]['height'] + 1
         print('retrieved blocks from ' + str(blocks[0]['height']) + ' to ' + str(startblock - 1))
@@ -156,7 +156,7 @@ def createPayment():
             tx.append(paytx)
 
     with open(config['paymentStorage'], 'w') as outfile:
-        json.dump(tx, outfile)
+        hyperjson.dump(tx, outfile)
     
     print('payments written to ' + config['paymentStorage'])
 
@@ -188,7 +188,7 @@ def main():
     #save current blocks
     print('saving blockfile...')
     with open(config['blockStorage'], 'w') as outfile:
-        json.dump(blocks, outfile)
+        hyperjson.dump(blocks, outfile)
 
     print('preparing payments...')
     if config['endBlock'] == 0:
