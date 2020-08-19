@@ -11,6 +11,26 @@ totalfee = 0
 with open('config_run.json') as json_file:
     config = hyperjson.load(json_file)
 
+    
+def cleanBlocks(blocksJSON):
+    for block in blocksJSON:
+        block.pop('nxt-consensus', None)
+        block.pop('version', None)
+        block.pop('features', None)
+        block.pop('blocksize', None)
+        block.pop('signature', None)
+        block.pop('reference', None)
+        block.pop('transactionCount', None)
+        block.pop('generatorPublicKey', None)
+        block.pop('desiredReward', None)
+        block.pop('timestamp', None)
+
+        block['transactions'] = [transaction for transaction in block['transactions'] if
+                                 transaction['type'] == 8 or transaction['type'] == 9]
+
+    return blocksJSON
+
+
 def getAllBlocks():
     startblock = config['firstBlock']
     steps = 100
@@ -55,7 +75,7 @@ def getAllBlocks():
 
                 block['transactions'] = txs
 
-        blocks += blocksJSON
+        blocks += cleanBlocks(blocksJSON)
 
         if (startblock + steps < endBlock):
             startblock += steps
