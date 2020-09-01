@@ -14,6 +14,10 @@ with open('config_run.json') as json_file:
     
 def cleanBlocks(blocksJSON):
     for block in blocksJSON:
+        
+        if 'totalFee' in block:
+            block['fee'] = block['totalFee']
+
         block.pop('nxt-consensus', None)
         block.pop('version', None)
         block.pop('features', None)
@@ -104,13 +108,9 @@ def prepareDataStructure(blocks):
                 tx['block'] = block['height']
                 myCanceledLeases[tx['leaseId']] = tx
 
-            if tx['fee'] < (1001 * pow(10, 8)):
-                fee += tx['fee']
+        if prevBlock is not None:
+            block['previousBlockFees'] = prevBlock['fee']
 
-        if len(prevBlock) > 0:
-            block['previousBlockFees'] = prevBlock['fees']
-        
-        block['fees'] = fee
         prevBlock = block
 
     return blocks
