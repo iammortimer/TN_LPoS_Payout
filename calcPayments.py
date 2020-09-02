@@ -92,7 +92,7 @@ def prepareDataStructure(blocks):
     global myLeases
     global myCanceledLeases
     global myForgedBlocks
-    prevBlock = []
+    prevBlock = None
 
     for block in blocks:
         fee = 0
@@ -144,7 +144,7 @@ def distribute(activeLeases, amountTotalLeased, block):
     global payments
     global totalfee
 
-    fee = block['fees'] * 0.4 + block['previousBlockFees'] * 0.6
+    fee = block['fee'] * 0.4 + block['previousBlockFees'] * 0.6
     totalfee += fee
 
     for address in activeLeases:
